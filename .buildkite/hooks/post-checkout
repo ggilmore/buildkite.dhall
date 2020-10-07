@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -e
 echo 'downloading dhall...'
-curl -L https://github.com/dhall-lang/dhall-haskell/releases/download/1.35.0/dhall-json-1.7.2-x86_64-linux.tar.bz2 | tar -zx
+curl -L https://github.com/dhall-lang/dhall-haskell/releases/download/1.35.0/dhall-json-1.7.2-x86_64-linux.tar.bz2 | tar --extract --bzip2
