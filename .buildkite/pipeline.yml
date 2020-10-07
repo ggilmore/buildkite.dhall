@@ -1,0 +1,4 @@
+---
+steps:
+  - label: 'Upload'
+    command: cat .buildkite/pipeline.dhall | dhall-to-yaml | buildkite-agent pipeline upload
