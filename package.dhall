@@ -4,7 +4,7 @@ let Command =
       { Type =
           { name : Text
           , commands : List Text
-          , agents : { queue : Text }
+          , agents : Optional { queue : Text }
           , retry : Optional Retry
           , branches : Optional Text
           , artifact_paths : Optional (List Text)
