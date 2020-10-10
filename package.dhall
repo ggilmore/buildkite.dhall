@@ -1,3 +1,6 @@
+let Map =
+      https://prelude.dhall-lang.org/v18.0.0/Map/Type sha256:210c7a9eba71efbb0f7a66b3dcf8b9d3976ffc2bc0e907aadfb6aa29c333e8ed
+
 let Retry = { manual : { permit_on_passed : Bool } }
 
 let Command =
@@ -30,28 +33,24 @@ let Trigger =
           , label : Text
           , branches : Optional Text
           , build :
-              { message : Text
-              , commit : Text
-              , branch : Text
-              , env :
-                  { BUILDKITE_PULL_REQUEST : Text
-                  , BUILDKITE_PULL_REQUEST_BASE_BRANCH : Text
-                  , BUILDKITE_PULL_REQUEST_REPO : Text
-                  }
+              { message : Optional Text
+              , commit : Optional Text
+              , branch : Optional Text
+              , env : Map Text Text
               }
           }
       , default =
         { branches = None Text
         , build =
-          { message = "\${BUILDKITE_MESSAGE}"
-          , commit = "\${BUILDKITE_COMMIT}"
-          , branch = "\${BUILDKITE_BRANCH}"
-          , env =
-            { BUILDKITE_PULL_REQUEST = "\${BUILDKITE_PULL_REQUEST}"
-            , BUILDKITE_PULL_REQUEST_BASE_BRANCH =
-                "\${BUILDKITE_PULL_REQUEST_BASE_BRANCH}"
-            , BUILDKITE_PULL_REQUEST_REPO = "\${BUILDKITE_PULL_REQUEST_REPO}"
-            }
+          { message = Some "\${BUILDKITE_MESSAGE}"
+          , commit = Some "\${BUILDKITE_COMMIT}"
+          , branch = Some "\${BUILDKITE_BRANCH}"
+          , env = toMap
+              { BUILDKITE_PULL_REQUEST = "\${BUILDKITE_PULL_REQUEST}"
+              , BUILDKITE_PULL_REQUEST_BASE_BRANCH =
+                  "\${BUILDKITE_PULL_REQUEST_BASE_BRANCH}"
+              , BUILDKITE_PULL_REQUEST_REPO = "\${BUILDKITE_PULL_REQUEST_REPO}"
+              }
           }
         }
       }
