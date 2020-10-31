@@ -6,11 +6,15 @@ let Block = ./block.dhall
 
 let Trigger = ./trigger.dhall
 
-let steps =
+let Steps =
       < Wait : Wait.Type
       | Block : Block.Type
       | Command : Command.Type
       | Trigger : Trigger.Type
       >
 
-in  { steps, Wait, Block, Command, Trigger }
+let wait = Steps.Wait Wait.default
+
+let Retry = ./retry.dhall
+
+in  { Steps, Wait, Block, Command, Trigger, wait, Retry }
